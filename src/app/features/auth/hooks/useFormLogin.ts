@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
+import { toast } from 'react-toastify';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { ForgotSuccessAlert } from '../components';
+
 import { LoginForm } from '../types';
 
 type StartLoginFunction = (data: LoginForm) => Promise<void>;
 
-export const useFormLogin = (startLogin:StartLoginFunction) => {
+export const useFormLogin = (startLogin: StartLoginFunction) => {
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -24,15 +25,16 @@ export const useFormLogin = (startLogin:StartLoginFunction) => {
         email,
         password
     }) => {
-        
+
         startLogin({
             email,
             password
         });
 
-        ForgotSuccessAlert(email, () =>{
+        toast.success(`Welcome back ${email} !`,{
             
-        });
+        })
+
         // navigate(HOME);
     }
     return {
